@@ -1,3 +1,5 @@
+//Classe utilizada para configurar e iniciar a aplicação ASP.NET Core
+// Ele é a classe mãe do projeto, responsável por faze-lo rodar.
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
