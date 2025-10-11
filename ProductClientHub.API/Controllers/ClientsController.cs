@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ProductClientHub.Communication.Requests;
 
 namespace ProductClientHub.API.Controllers
 {
@@ -10,7 +11,7 @@ namespace ProductClientHub.API.Controllers
     {
         // Definindo que o método responde a requisições POST (CREATE)
         [HttpPost]
-        public IActionResult Register()
+        public IActionResult Register([FromBody] RequestClientJSON request)
         {
             return Ok();
         }
@@ -34,7 +35,7 @@ namespace ProductClientHub.API.Controllers
         // informa que o parâmetro da rota é "id"
         // Responsável por diferenciar os métodos GET
         [Route("{id}")]
-        public IActionResult GetById(Guid id)
+        public IActionResult GetById([FromRoute]Guid id)
         {
             return Ok(); 
         }
