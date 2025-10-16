@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProductClientHub.Communication.Requests;
+using ProductClientHub.Communication.Responses;
+using ProductClientHub.API.UseCases.Clients.Register;
 
 namespace ProductClientHub.API.Controllers
 {
@@ -11,9 +13,15 @@ namespace ProductClientHub.API.Controllers
     {
         // Definindo que o método responde a requisições POST (CREATE)
         [HttpPost]
+        // Retorna o status code 201 (Created) quando a criação for bem sucedida
+        [ProducesResponseType(typeof(ResponseClientJSON), StatusCodes.Status201Created )]
         public IActionResult Register([FromBody] RequestClientJSON request)
         {
-            return Ok();
+            var useCase = new RegisterClientUseCase();
+            
+            useCase.Execute(request);
+
+            return Created();
         }
 
         // Definindo que o método responde a requisições PUT (UPDATE)
