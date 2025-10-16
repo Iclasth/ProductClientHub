@@ -19,9 +19,9 @@ namespace ProductClientHub.API.Controllers
         {
             var useCase = new RegisterClientUseCase();
             
-            useCase.Execute(request);
+            var response = useCase.Execute(request);
 
-            return Created();
+            return Created(string.Empty,response);
         }
 
         // Definindo que o método responde a requisições PUT (UPDATE)

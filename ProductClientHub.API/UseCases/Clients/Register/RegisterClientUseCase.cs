@@ -6,6 +6,11 @@ namespace ProductClientHub.API.UseCases.Clients.Register
     {
         public ResponseClientJSON Execute(RequestClientJSON request)
         {
+            // Criando uma instância da classe Validadora.
+            var validator = new RegisterClientValidator();
+
+            var result = validator.Validate(request);
+
             return new ResponseClientJSON();
         }
     }
