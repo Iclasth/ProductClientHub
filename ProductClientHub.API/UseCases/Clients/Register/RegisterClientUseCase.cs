@@ -11,6 +11,12 @@ namespace ProductClientHub.API.UseCases.Clients.Register
 
             var result = validator.Validate(request);
 
+            // Verificando se a validação falhou.
+            if (result.IsValid == false)
+            {
+                throw new ArgumentException("Error on requests");
+            }
+
             return new ResponseClientJSON();
         }
     }

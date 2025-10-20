@@ -14,14 +14,29 @@ namespace ProductClientHub.API.Controllers
         // Definindo que o método responde a requisições POST (CREATE)
         [HttpPost]
         // Retorna o status code 201 (Created) quando a criação for bem sucedida
-        [ProducesResponseType(typeof(ResponseClientJSON), StatusCodes.Status201Created )]
+        [ProducesResponseType(typeof(ResponseClientJSON), StatusCodes.Status201Created)]
+        // Retorna o status code 400 (Bad Request) quando houver erro na requisição
+        [ProducesResponseType(typeof(ResponseClientJSON), StatusCodes.Status400BadRequest)]
+
         public IActionResult Register([FromBody] RequestClientJSON request)
         {
-            var useCase = new RegisterClientUseCase();
-            
-            var response = useCase.Execute(request);
+            try
+            {
+                var useCase = new RegisterClientUseCase();
 
-            return Created(string.Empty,response);
+                var response = useCase.Execute(request);
+
+                return Created(string.Empty, response);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new ResponseErrorMessagesJSON(ex.Message));
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new ResponseErrorMessagesJSON("Unknow error"));
+            }
+
         }
 
         // Definindo que o método responde a requisições PUT (UPDATE)
