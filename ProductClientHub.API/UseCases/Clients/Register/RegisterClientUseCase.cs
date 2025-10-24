@@ -1,5 +1,6 @@
 ﻿using ProductClientHub.Communication.Requests;
 using ProductClientHub.Communication.Responses;
+using ProductClientHub.Exceptions.ExceptionsBase;
 namespace ProductClientHub.API.UseCases.Clients.Register
 {
     public class RegisterClientUseCase
@@ -14,7 +15,9 @@ namespace ProductClientHub.API.UseCases.Clients.Register
             // Verificando se a validação falhou.
             if (result.IsValid == false)
             {
-                throw new ArgumentException("Error on requests");
+                var errors = result.Errors.Select(failure => failure.ErrorMessage).ToList();
+
+                throw new ErrorOnvValidationException(errors);
             }
 
             return new ResponseClientJSON();

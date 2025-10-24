@@ -8,5 +8,11 @@
         {
             ErrorsMensages = [message];
         }
+
+        public ResponseErrorMessagesJSON(List<string> messages)
+        {
+            ErrorsMensages = messages;
+        }
+
     }
 }
