@@ -1,5 +1,7 @@
 //Classe utilizada para configurar e iniciar a aplicação ASP.NET Core
 // Ele é a classe mãe do projeto, responsável por faze-lo rodar.
+using ProductClientHub.API.Filters;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -8,6 +10,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddMvc(option => option.Filters.Add(typeof(ExceptionFilter)));
 
 var app = builder.Build();
 

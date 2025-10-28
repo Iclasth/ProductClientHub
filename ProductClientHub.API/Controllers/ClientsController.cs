@@ -21,23 +21,13 @@ namespace ProductClientHub.API.Controllers
 
         public IActionResult Register([FromBody] RequestClientJSON request)
         {
-            try
-            {
+           
                 var useCase = new RegisterClientUseCase();
 
                 var response = useCase.Execute(request);
 
                 return Created(string.Empty, response);
-            }
-            catch (ProductClientHubException ex)
-            {
-               var errors = ex.GetErrors();
-                return BadRequest(new ResponseErrorMessagesJSON(errors));
-            }
-            catch
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, new ResponseErrorMessagesJSON("Unknow error"));
-            }
+            
 
         }
 
